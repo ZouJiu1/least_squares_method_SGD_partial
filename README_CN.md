@@ -30,7 +30,7 @@ $\frac{\delta\text{z}}{\delta b}=-2\sum_{i=1}^{n}{[y_i - (a\cdot x_i+b)]}$
 
 得$a\cdot S_{xx}+b\cdot S_x=S_{xy}$ 和 $a\cdot S_x + bn=S_y$
 
-系数行列式$\Delta$：$\Delta=\begin{vmatrix}S_{xx}&S_x\\S_x& n\end{vmatrix}=n\cdot S_{xx}-S^2_x$
+系数行列式$\Delta$：$`\Delta=\begin{vmatrix}S_{xx}&S_x\\S_x& n\end{vmatrix}=n\cdot S_{xx}-S^2_x`$
 
 根据克拉默法则，求出 $a=\frac{nS_{xy}-S_xS_y}{n\cdot S_{xx}-S^2_x}$, $b=\frac{S_yS_{xx}-S_xS_{xy}}{n\cdot S_{xx}-S^2_x}$
 

@@ -30,7 +30,7 @@ Let $S_{xy} = \sum_{i=1}^{n}{x_iy_i}$, $S_{xx} = \sum_{i=1}^{n}{x^2_i}$, $S_x=\s
 
 We get $a\cdot S_{xx}+b\cdot S_x=S_{xy}$ and $a\cdot S_x + bn=S_y$
 
-The coefficient determinant $\Delta$: $\Delta=\begin{vmatrix}S_{xx}&S_x\\S_x& n\end{vmatrix}=n\cdot S_{xx}-S^2_x$
+The coefficient determinant $\Delta$: $`\Delta=\begin{vmatrix}S_{xx}&S_x\\S_x& n\end{vmatrix}=n\cdot S_{xx}-S^2_x`$
 
 By Cramer's rule: $a=\frac{nS_{xy}-S_xS_y}{n\cdot S_{xx}-S^2_x}$, $b=\frac{S_yS_{xx}-S_xS_{xy}}{n\cdot S_{xx}-S^2_x}$
 
