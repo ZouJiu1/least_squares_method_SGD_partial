@@ -26,7 +26,7 @@ $\frac{\delta\text{z}}{\delta b}=-2\sum_{i=1}^{n}{[y_i - (a\cdot x_i+b)]}$
 
 即：$\sum_{i=1}^{n}{x_iy_i}-a\sum_{i=1}^{n}{x^2_i}=b\sum_{i=1}^{n}{x_i}$，和 $\sum_{i=1}^{n}y_i-a\sum_{i=1}^{n}x_i = bn$
 
-令$S_{xy} = \sum_{i=1}^{n}{x_iy_i}$，$S_{xx} = \sum_{i=1}^{n}{x^2_i}$,$\qquad$ $S_x=\sum_{i=1}^{n}x_i$, $S_y=\sum_{i=1}^{n}y_i$
+令$S_{xy} = \sum_{i=1}^{n}{x_iy_i}$，$S_{xx} = \sum_{i=1}^{n}{x^2_i}$, $S_x=\sum_{i=1}^{n}x_i$, $S_y=\sum_{i=1}^{n}y_i$
 
 得$a\cdot S_{xx}+b\cdot S_x=S_{xy}$ 和 $a\cdot S_x + bn=S_y$
 
