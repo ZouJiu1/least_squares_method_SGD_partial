@@ -40,14 +40,47 @@ def partial_solution(points):
 
     return a_0, b_0
 
+def plot_ab(aaCol, bbCol, noise_ratio):
+    global a, b
+    with open(f"a_b_{noise_ratio}.txt", "w") as f:
+        length = min(10000, len(aaCol))
+        for i in range(10000):
+            f.write(f"{i} {aaCol[i]:.6f} {bbCol[i]:.6f}\n")
+    plt.close("all")
+    plt.figure(figsize=(10, 6))
+    plt.scatter(np.arange(len(aaCol)), aaCol, s=1, color="blue", label="a")
+    plt.scatter(np.arange(len(bbCol)), bbCol, s=1, color="red", label="b")
+    plt.xlabel("epoch")
+    plt.ylabel("a/b")
+    plt.title(f"a={a:.6f} b={b:.6f} (noise_ratio = {noise_ratio})")
+    plt.legend()
+    plt.savefig(f"a_b_{noise_ratio}.png")
+    plt.close("all")
+
+    plt.close("all")
+    plt.figure(figsize=(10, 6))
+    aaCol = aaCol[:1000]
+    bbCol = bbCol[:1000]
+    plt.scatter(np.arange(len(aaCol)), aaCol, s=1, color="blue", label="a")
+    plt.scatter(np.arange(len(bbCol)), bbCol, s=1, color="red", label="b")
+    plt.xlabel("epoch")
+    plt.ylabel("a/b")
+    plt.title(f"a={a:.6f} b={b:.6f} (noise_ratio = {noise_ratio})")
+    plt.legend()
+    plt.savefig(f"1000epoch_a_b_{noise_ratio}.png")
+    plt.close("all")
+
 def grad_solution(points):
+    global a, b
     a_0 = 0.0001
     b_0 = -0.0001
 
     learning_rate = 0.00001
-    epoch = 100000
+    epoch = 200000
+    aaCol = []
+    bbCol = []
     for e in range(epoch):
-        if e == epoch - 3:
+        if e == 190000:
             learning_rate = learning_rate / 10
         for i in range(number):
             x = points[i][0]
@@ -60,33 +93,39 @@ def grad_solution(points):
             bb = b_0 - learning_rate * delta_b
 
             if abs(aa - a) < 0.0000001 and abs(bb - b) < 0.0000001:
-                return aa, bb
+                return aa, bb, np.array(aaCol), np.array(bbCol)
             a_0 = aa
             b_0 = bb
-    return a_0, b_0
+
+        aaCol.append(aa)
+        bbCol.append(bb)
+    return a_0, b_0, np.array(aaCol), np.array(bbCol)
 
 if __name__ == "__main__":
-    print("noise_ratio = 0")
-    points = fit_point(0)
+    noise_ratio0 = 0
+    print(f"noise_ratio = {noise_ratio0}")
+    points = fit_point(noise_ratio0)
     a0, b0 = partial_solution(points)
     sa = abs(a0 - a); sa = f"partial_solution: {a0:.6f} -> {a:.6f}"
     sb = abs(b0 - b); sb = f"partial_solution: {b0:.6f} -> {b:.6f}"
     print(sa, sb)
 
-    a1, b1 = grad_solution(points)
+    a1, b1, aaCol, bbCol = grad_solution(points)
     sa = abs(a1 - a); sa = f"grad_solution: {a1:.6f} -> {a:.6f}"
     sb = abs(b1 - b); sb = f"grad_solution: {b1:.6f} -> {b:.6f}"
     print(sa, sb)
     
-
-    print("noise_ratio = 30")
-    points = fit_point(30)
+    noise_ratio1 = 30
+    print(f"noise_ratio = {noise_ratio1}")
+    points = fit_point(noise_ratio1)
     a0, b0 = partial_solution(points)
     sa = abs(a0 - a); sa = f"partial_solution: {a0:.6f} -> {a:.6f}"
     sb = abs(b0 - b); sb = f"partial_solution: {b0:.6f} -> {b:.6f}"
     print(sa, sb)
-    
-    a1, b1 = grad_solution(points)
+
+    plot_ab(aaCol, bbCol, noise_ratio0)
+    a1, b1, aaCol, bbCol = grad_solution(points)
+    plot_ab(aaCol, bbCol, noise_ratio1)
     sa = abs(a1 - a); sa = f"grad_solution: {a1:.6f} -> {a:.6f}"
     sb = abs(b1 - b); sb = f"grad_solution: {b1:.6f} -> {b:.6f}"
     print(sa, sb)
